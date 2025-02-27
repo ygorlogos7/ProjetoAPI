@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using ProjetoAPI.Context;
+using ProjetoAPI.EndPoints;
 using ProjetoAPI.Model;
 using ProjetoAPI.NovaPasta;
 
@@ -21,6 +22,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapCategoriaEndpoints();
 
 app.MapProdutosEndpoints();
 
