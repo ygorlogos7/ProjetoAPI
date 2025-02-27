@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoAPI.Context;
 using ProjetoAPI.Model;
+using ProjetoAPI.NovaPasta;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,43 +22,33 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Async  - Assincromo
-app.MapGet("/produtos", async (ProdutoDbContext db) =>
-{
-   return await db.Produtos.ToListAsync();
-});
-
-//Todo Cadastro  - POST 
-app.MapPost("/produtos", static async (Produto pto, ProdutoDbContext  db) =>
-{
-    db.Produtos.Add(pto);
-    // EF - SaveChanges
-    await db.SaveChangesAsync();
-
-    return Results.Created();
-});
-
-static DbSet<Produto> Add(Produto pto)
-{
-    throw new NotImplementedException();
-}
-
-// GET - Listagem de produtos - "/Listarprodutos"
-app.MapGet("/listarprodutos", async ( ProdutoDbContext db) =>
-{
-
-    return await db.Produtos.ToListAsync();
-});
-
-// POST - Cadastro de Produtos - "/cadastrarprodutos"
-app.MapPost("/cadastrarprodutos", static async (Produto cadastropto, ProdutoDbContext db) =>
-{
-    db.Produtos.Add(cadastropto);
-    // EF - SaveChanges
-    await db.SaveChangesAsync();
-
-    return Results.Created();
-});
+app.MapProdutosEndpoints();
 
 app.Run();
+
+// Async  - Assincromo
+
+// GET - Listagem de produtos - "/Listarprodutos"
+//app.MapGet("/listarprodutos", async ( ProdutoDbContext db) =>
+//{
+
+//    return await db.Produtos.ToListAsync();
+//});
+
+//// POST - Cadastro de Produtos - "/cadastrarprodutos"
+//app.MapPost("/cadastrarprodutos", static async (Produto cadastropto, ProdutoDbContext db) =>
+//{
+//    db.Produtos.Add(cadastropto);
+//    // EF - SaveChanges
+//    await db.SaveChangesAsync();
+
+//    return Results.Created();
+//});
+
+//await db.Produtos.FirstOrDefault( proudto => produto.Nome == "X")
+
+//Autenticacao da API
+//[roles = "Administrador"]
+
+
 

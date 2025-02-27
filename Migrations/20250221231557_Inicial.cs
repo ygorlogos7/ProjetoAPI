@@ -31,5 +31,7 @@ namespace ProjetoAPI.Migrations
             migrationBuilder.DropTable(
                 name: "Produtos");
         }
+
     }
 }
+
